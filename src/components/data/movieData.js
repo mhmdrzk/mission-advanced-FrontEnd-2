@@ -1,0 +1,55 @@
+const movieImages = {
+  genres: [
+    "Alur",
+    "Aku-suka",
+    "Anime",
+    "Klasik",
+    "Drama",
+    "Fantasik",
+    "Film",
+    "Horror",
+    "Komedi",
+    "Romance",
+    "Sci-Fi & Anim",
+    "K-Drama",
+    "Komedik",
+    "Pencarian",
+    "Romantis",
+    "Sains & Alam",
+  ],
+
+  continueWacth: [
+    "/img/film-image/Component 2.png",
+    "/img/film-image/Component 2.jpg",
+    "/img/film-image/Frame 66.jpg",
+    "/img/film-image/Frame 67.jpg",
+    "/img/film-image/Component 2.png",
+    "/img/film-image/Component 2.jpg",
+  ],
+  topRatingFilm: [
+    "/img/film-image/film-1.jpg",
+    "/img/film-image/film-2.png",
+    "/img/film-image/film-3.jpg",
+    "/img/film-image/film-4.png",
+    "/img/film-image/film-5.png",
+    "/img/film-image/film-6.png",
+  ],
+  trendingFilm: [
+    "/img/film-image/film-7.jpg",
+    "/img/film-image/film-8.png",
+    "/img/film-image/film-9.png",
+    "/img/film-image/film-10.png",
+    "/img/film-image/film-11.png",
+    "/img/film-image/film-12.png",
+  ],
+  newFilm: [
+    "/img/film-image/film-6.png",
+    "/img/film-image/film-1.jpg",
+    "/img/film-image/film-5.png",
+    "/img/film-image/film-2.png",
+    "/img/film-image/film-3.jpg",
+    "/img/film-image/film-4.png",
+  ],
+};
+
+export default movieImages;
