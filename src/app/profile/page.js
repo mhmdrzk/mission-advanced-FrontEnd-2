@@ -87,7 +87,6 @@ const profile = () => {
         </div>
       </div>
 
-      {/* Daftar Saya */}
       <div>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">Daftar Saya</h2>
