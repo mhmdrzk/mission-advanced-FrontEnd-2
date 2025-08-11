@@ -4,10 +4,17 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import myList from "@/components/data/myList";
 import Footer from "@/components/Footer";
+import { useState } from "react";
 
-const profile = () => {
+const Profile = () => {
+  const [list, setList] = useState(myList);
+
+  const handleDeleteItem = (index) => {
+    setList((prevList) => prevList.filter((item, i) => i !== index));
+  };
+
   return (
-    <div className=" min-h-screen text-white p-6 space-y-8">
+    <div className="min-h-screen text-white p-6 space-y-8">
       <Header />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-[#181a1c] p-6 rounded-md col-span-2">
@@ -31,7 +38,7 @@ const profile = () => {
               <div className="relative">
                 <input
                   type="text"
-                  defaultValue="Rizky"
+                  defaultValue=""
                   placeholder="masukan nama pengguna"
                   className="w-full bg-[#E7E3FC3B] border border-gray-600 px-4 py-2 rounded pr-10"
                 />
@@ -45,7 +52,7 @@ const profile = () => {
               <label className="text-sm">Email</label>
               <input
                 type="email"
-                defaultValue="mhmdrzk2708@gmail.com"
+                defaultValue=""
                 placeholder="masukan email"
                 className="w-full bg-[#E7E3FC3B] border border-gray-600 px-4 py-2 rounded"
               />
@@ -55,7 +62,7 @@ const profile = () => {
               <label className="text-sm">Kata Sandi</label>
               <input
                 type="password"
-                defaultValue="*************"
+                defaultValue=""
                 placeholder="masukan kata sandi"
                 className="w-full bg-[#E7E3FC3B] border border-gray-600 px-4 py-2 rounded"
               />
@@ -67,7 +74,7 @@ const profile = () => {
           </div>
         </div>
 
-        <div className="bg-[#3D4142] h-50 p-6 rounded-md justify-between  ">
+        <div className="bg-[#3D4142] h-50 p-6 rounded-md justify-between">
           <div className="flex">
             <img src="/img/warning.png" alt="..." className="h-25 w-25" />
             <div>
@@ -80,7 +87,7 @@ const profile = () => {
           </div>
 
           <div className="flex justify-end mt-3">
-            <button className=" bg-[#181A1C]  rounded-3xl hover:bg-[#080808] py-2 px-8 text-sm">
+            <button className="bg-[#181A1C] rounded-3xl hover:bg-[#080808] py-2 px-8 text-sm">
               Mulai Berlangganan
             </button>
           </div>
@@ -99,7 +106,7 @@ const profile = () => {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4">
-          {myList.slice(0, 7).map((item, index) => (
+          {list.slice(0, 7).map((item, index) => (
             <div key={index} className="relative group rounded overflow-hidden">
               <Image
                 src={item.img}
@@ -108,6 +115,12 @@ const profile = () => {
                 height={450}
                 className="w-full h-auto object-cover transform transition duration-300 ease-in-out hover:scale-90 rounded-lg"
               />
+              <button
+                onClick={() => handleDeleteItem(index)}
+                className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full"
+              >
+                Hapus
+              </button>
             </div>
           ))}
         </div>
@@ -117,4 +130,4 @@ const profile = () => {
   );
 };
 
-export default profile;
+export default Profile;

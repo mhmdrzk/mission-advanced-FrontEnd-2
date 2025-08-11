@@ -1,3 +1,5 @@
+"use client";
+import { useState } from "react";
 import Image from "next/image";
 import GenreDropdown from "@/components/GendreDropdown";
 
@@ -9,6 +11,12 @@ const Banner = ({
   genres = [],
   showGenreDropdown = true,
 }) => {
+  const [showDescription, setShowDescription] = useState(false);
+
+  const toggleDescription = () => {
+    setShowDescription(!showDescription);
+  };
+
   return (
     <div className="relative w-full h-90 sm:h-140 bg-gray-800 ">
       <Image
@@ -22,7 +30,13 @@ const Banner = ({
       <div className="relative z-20 text-white px-10 py-10 sm:py-45">
         {showGenreDropdown && <GenreDropdown genres={genres} />}
         <h1 className="text-4xl font-bold">{title}</h1>
-        <p className="text-lg mt-2">{description}</p>
+
+        <button onClick={toggleDescription} className="text-lg text-white mt-2">
+          {showDescription ? "Sembunyikan Deskripsi" : "Tampilkan Deskripsi"}
+        </button>
+
+        {showDescription && <p className="text-lg mt-2">{description}</p>}
+
         <div className="mt-6">
           <button className="bg-[#024DB7] hover:bg-[#0367DB] transition text-white px-6 py-2 rounded-4xl mr-4">
             Main
