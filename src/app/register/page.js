@@ -5,20 +5,20 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import FormCard from "@/components/FormCard";
 import InputField from "@/components/InputField";
+import api from "@/utils/api";
 
-export default function RegisterPage() {
+const RegisterPage = () => {
   const router = useRouter();
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!username || !password || !confirmPassword) {
+    if (!username || !email || !password || !confirmPassword) {
       setError("Semua field wajib diisi.");
       return;
     }
@@ -28,8 +28,19 @@ export default function RegisterPage() {
       return;
     }
 
-    setError("");
-    router.push("/beranda");
+    try {
+      await api.post("/users", {
+        username,
+        email,
+        password,
+        avatar: "/img/profile.png",
+      });
+
+      alert("Pendaftaran berhasil! Silakan login.");
+      router.push("/");
+    } catch (err) {
+      setError("Gagal mendaftar, coba lagi.");
+    }
   };
 
   return (
@@ -44,6 +55,14 @@ export default function RegisterPage() {
             placeholder="Masukkan username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+          />
+
+          <InputField
+            label="Email"
+            placeholder="Masukkan email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
           />
 
           <InputField
@@ -71,22 +90,21 @@ export default function RegisterPage() {
           </div>
 
           <Button text="Daftar" type="submit" />
-
-          <div className="flex items-center justify-center gap-2 text-gray-500 text-sm my-2">
-            <hr className="flex-grow border-gray-700" />
-            atau
-            <hr className="flex-grow border-gray-700" />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full border border-gray-600 hover:bg-gray-800 text-white py-2 rounded-full flex items-center justify-center gap-2"
-          >
-            <img src="/img/logo-google.png" alt="Google" className="h-5 w-5" />
-            Daftar dengan Google
-          </button>
         </form>
+        <button
+          disabled
+          className="mt-4 flex items-center justify-center w-full border border-gray-500 rounded-2xl py-2 px-4 opacity-50 cursor-not-allowed"
+        >
+          <img
+            src="/img/logo-google.png"
+            alt="Google"
+            className="w-5 h-5 mr-2"
+          />
+          Masuk dengan Google
+        </button>
       </FormCard>
     </div>
   );
-}
+};
+
+export default RegisterPage;

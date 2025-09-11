@@ -1,9 +1,11 @@
 "use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
 import Button from "@/components/Button";
 import FormCard from "@/components/FormCard";
+import api from "@/utils/api";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,13 +13,27 @@ const Login = () => {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!username || !password) {
       setError("Username dan password wajib diisi");
-    } else {
-      router.push("/beranda");
+      return;
+    }
+
+    try {
+      const res = await api.get(
+        `/users?username=${username}&password=${password}`
+      );
+
+      if (res.data.length === 0) {
+        setError("Username atau password salah!");
+      } else {
+        localStorage.setItem("user", JSON.stringify(res.data[0]));
+        router.push("/beranda");
+      }
+    } catch (err) {
+      setError("Gagal masuk, coba lagi.");
     }
   };
 
@@ -48,6 +64,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             error={error}
           />
+
+          {error && <p className="text-red-500 text-sm -mt-2">{error}</p>}
+
           <div className="flex justify-between text-sm text-gray-300">
             <p className="mt-6 mb-6">
               Belum punya akun? <a href="/register">Daftar</a>
@@ -57,17 +76,18 @@ const Login = () => {
             </p>
           </div>
           <Button text="Masuk" type="submit" />
-          <div className="flex justify-center mt-4">
-            <button className="flex items-center justify-center w-full py-3 px-4 border border-gray-700 rounded-4xl text-white hover:bg-gray-700 transition">
-              <img
-                src="/img/logo-google.png"
-                alt="Google logo"
-                className="mr-2 w-5 h-5"
-              />
-              Masuk dengan Google
-            </button>
-          </div>
         </form>
+        <button
+          disabled
+          className="mt-4 flex items-center justify-center w-full border border-gray-500 rounded-2xl py-2 px-4 opacity-50 cursor-not-allowed"
+        >
+          <img
+            src="/img/logo-google.png"
+            alt="Google"
+            className="w-5 h-5 mr-2"
+          />
+          Masuk dengan Google
+        </button>
       </FormCard>
     </div>
   );
