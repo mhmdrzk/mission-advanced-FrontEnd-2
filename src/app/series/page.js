@@ -44,35 +44,39 @@ const series = () => {
         <h2 className="text-xl sm:text-2xl md:text-2xl   font-bold text-white">
           Melanjutkan Tonton Series
         </h2>
-        <Carousel images={movieImages.continueWacth} isSingleOnMobile={true} />
+        <Carousel
+          category="continueWacth"
+          isSingleOnMobile={true}
+          showAddButton={false}
+        />
       </section>
 
       <section className="mt-4">
         <h2 className="text-xl sm:text-2xl md:text-2xl  font-bold text-white">
           Series persebahan Chill
         </h2>
-        <Carousel images={movieImages.topRatingFilm} />
+        <Carousel category="trendingFilm" />
       </section>
 
       <section className="mt-4">
         <h2 className="text-xl sm:text-2xl md:text-2xl  font-bold text-white">
           Top Rating Series Hari ini
         </h2>
-        <Carousel images={movieImages.trendingFilm} />
+        <Carousel category="topRatingFilm" />
       </section>
 
       <section className="mt-4">
         <h2 className="text-xl sm:text-2xl md:text-2xl   font-bold text-white">
           Series Trending
         </h2>
-        <Carousel images={movieImages.newFilm} />
+        <Carousel category="trendingFilm" />
       </section>
 
       <section className="mt-4">
         <h2 className="text-xl sm:text-2xl md:text-2xl   font-bold text-white">
           Rilis Baru
         </h2>
-        <Carousel images={movieImages.newFilm} />
+        <Carousel category="newFilm" />
       </section>
 
       <Footer />
