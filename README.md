@@ -1,3 +1,5 @@
+API Key = NEXT_PUBLIC_API_URL=https://68bb65d484055bce63f1d926.mockapi.io
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
